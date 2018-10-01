@@ -164,8 +164,8 @@ class _ChewiePlayerState extends State<Chewie> {
     SystemChrome.setEnabledSystemUIOverlays([]);
     if (isAndroid) {
       SystemChrome.setPreferredOrientations([
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
+       // DeviceOrientation.landscapeLeft,
+        DeviceOrientation.portraitUp,
       ]);
     }
 
