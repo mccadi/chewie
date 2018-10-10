@@ -241,10 +241,13 @@ class _MaterialControlsState extends State<MaterialControls> {
 
     return new Padding(
       padding: new EdgeInsets.only(right: 24.0),
-      child: new Text(
-        '${formatDuration(position)} / ${formatDuration(duration)}',
-        style: new TextStyle(
-          fontSize: 14.0,
+      child: Material(
+        color: Colors.transparent,
+        child: new Text(
+          '${formatDuration(position)} / ${formatDuration(duration)}',
+          style: new TextStyle(
+            fontSize: 14.0,
+          ),
         ),
       ),
     );

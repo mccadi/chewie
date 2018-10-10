@@ -71,7 +71,7 @@ class _VideoPlayerWithControlsState extends State<PlayerWithControls> {
                           Orientation.landscape
                   ? new VideoPlayer(controller)
                   : new AspectRatio(
-                      aspectRatio: widget.aspectRatio,
+                      aspectRatio: controller.value.aspectRatio,
                       child: new VideoPlayer(controller),
                     ),
             ),
