@@ -27,6 +27,8 @@ class Chewie extends StatefulWidget {
   /// Whether or not the video should loop
   final bool looping;
 
+  final bool isF2FVideo;
+
   /// Whether or not to show the controls
   final bool showControls;
 
@@ -55,6 +57,7 @@ class Chewie extends StatefulWidget {
     this.autoInitialize = false,
     this.autoPlay = false,
     this.startAt,
+    @required this.isF2FVideo,
     this.looping = false,
     this.cupertinoProgressColors,
     this.materialProgressColors,
@@ -77,6 +80,7 @@ class _ChewiePlayerState extends State<Chewie> {
   Widget build(BuildContext context) {
     return new PlayerWithControls(
       controller: _controller,
+      isF2FVideo: widget.isF2FVideo,
       onExpandCollapse: () => _pushFullScreenWidget(context),
       aspectRatio: widget.aspectRatio ?? _calculateAspectRatio(context),
       cupertinoProgressColors: widget.cupertinoProgressColors,
@@ -102,6 +106,7 @@ class _ChewiePlayerState extends State<Chewie> {
         alignment: Alignment.center,
         color: Colors.black,
         child: new PlayerWithControls(
+          isF2FVideo: widget.isF2FVideo,
           controller: _controller,
           onExpandCollapse: () =>
               new Future<dynamic>.value(Navigator.of(context).pop()),
@@ -164,7 +169,7 @@ class _ChewiePlayerState extends State<Chewie> {
     SystemChrome.setEnabledSystemUIOverlays([]);
     if (isAndroid) {
       SystemChrome.setPreferredOrientations([
-       // DeviceOrientation.landscapeLeft,
+        // DeviceOrientation.landscapeLeft,
         DeviceOrientation.portraitUp,
       ]);
     }

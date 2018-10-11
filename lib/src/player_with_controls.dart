@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
-
+import 'dart:io';
 import 'package:chewie/src/chewie_progress_colors.dart';
 import 'package:chewie/src/cupertino_controls.dart';
 import 'package:chewie/src/material_controls.dart';
@@ -17,6 +17,7 @@ class PlayerWithControls extends StatefulWidget {
   final Widget placeholder;
   final double aspectRatio;
   final bool autoPlay;
+  final bool isF2FVideo;
   final bool showControls;
 
   PlayerWithControls({
@@ -29,6 +30,7 @@ class PlayerWithControls extends StatefulWidget {
     this.cupertinoProgressColors,
     this.materialProgressColors,
     this.placeholder,
+    @required this.isF2FVideo,
     this.autoPlay,
   }) : super(key: key);
 
@@ -50,7 +52,7 @@ class _VideoPlayerWithControlsState extends State<PlayerWithControls> {
                 MediaQuery.of(context).orientation == Orientation.landscape
             ? _buildPlayerWithControls(controller, context)
             : new AspectRatio(
-                aspectRatio: widget.aspectRatio,
+                aspectRatio:  Platform.isAndroid && widget.isF2FVideo? controller.value.size.height/controller.value.size.width : controller.value.size.width/controller.value.size.height,
                 child: _buildPlayerWithControls(controller, context),
               ),
       ),
@@ -71,7 +73,7 @@ class _VideoPlayerWithControlsState extends State<PlayerWithControls> {
                           Orientation.landscape
                   ? new VideoPlayer(controller)
                   : new AspectRatio(
-                      aspectRatio: controller.value.aspectRatio,
+                      aspectRatio: Platform.isAndroid && widget.isF2FVideo? controller.value.size.height/controller.value.size.width : controller.value.size.width/controller.value.size.height,
                       child: new VideoPlayer(controller),
                     ),
             ),
